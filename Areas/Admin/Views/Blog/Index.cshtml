@@ -1,0 +1,61 @@
+﻿@model IEnumerable<BlogListItemVM>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<a asp-action="Create" asp-controller="Blog" class="btn btn-outline-success mb-3">Create</a>
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" cellspacing="0">
+        <thead>
+            <tr>
+                <th class="text-center">Id</th>
+                <th class="text-center">Title</th>
+                <th class="text-center">Description</th>
+                <th class="text-center">AuthorId</th>
+                <th class="text-center">Tags</th>
+                <th class="text-center">CreatedAt</th>
+                <th class="text-center">IsDeleted</th>
+
+                <th class="text-center" colspan="2">Action</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Title</td>
+                        <td>@item.Description</td>
+                        <td>@item.AuthorId</td>
+                        @if (item.Tag == null || item.Tag.Count() == 0)
+                        {
+                            <td>No Tag</td>
+                        }
+                        else
+                        {
+                            <td>@string.Join(",",item.Tag.Select(x=>x.Name))</td>
+                        }
+                        <td>@item.CreatedAt</td>
+                        <td>@item.IsDeleted</td>
+                        
+                        <td><a class="btn btn-outline-info" asp-action="Update" asp-route-id="@item.Id">Update</a></td>
+                        <td><a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td class="text-center" colspan="6">No Data</td>
+                </tr>
+            }
+
+
+    </table>
+</div>
+
+

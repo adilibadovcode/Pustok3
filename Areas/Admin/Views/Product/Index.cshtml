@@ -1,0 +1,77 @@
+﻿@using SitePustok.Areas.Admin.ViewModels
+@model IEnumerable<AdminProductListItemVM>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Products</h6>
+    </div>
+    <div class="card-body">
+        <a asp-action="Create" asp-controller="Product" class="btn btn-outline-success mb-3">Create</a>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="text-center">Id</th>
+                        <th class="text-center">SellPrice</th>
+                        <th class="text-center">CostPrice</th>
+                        <th class="text-center">Discount</th>
+                        <th class="text-center">ImageUrl</th>
+                        <th class="text-center">Images</th>
+                        <th class="text-center" colspan="2">Action</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr class='@(item.IsDeleted?"bg-danger":"")'>
+                                <td>@item.Id</td>
+                                <td>@item.SellPrice</td>
+                                <td>@item.CostPrice</td>
+                                <td>@item.Discount</td>
+                                <td>
+                                    @if (item.ImageUrl.Contains("://"))
+                                    {
+                                        <img width="80" src="@item.ImageUrl" />
+                                    }
+                                    else
+                                    {
+                                        <img width="80" src="~/@item.ImageUrl" />
+                                    }
+                                </td>
+                                <td><a class="btn btn-outline-info" asp-action="Update" asp-route-id="@item.Id">Update</a></td>
+                                <td><a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td class="text-center" colspan="10">No Data</td>
+                        </tr>
+                    }
+
+
+            </table>
+        </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+
