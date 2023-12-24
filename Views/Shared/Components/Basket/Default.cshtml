@@ -2,15 +2,15 @@
 @model List<BasketProductItemVM>
 
 <div class="cart-block">
-    <div class="cart-total" >
+    <div class="cart-total">
         <span class="text-number">
-          @Model.Sum(p=>p.Count)
+            @Model.Sum(p => p.Count)
         </span>
         <span class="text-item">
             Shopping Cart
         </span>
         <span class="price">
-         $@Model.Sum(p=>p.Count*p.Price)
+            $@Model.Sum(p => p.Count * p.Price)
             <i class="fas fa-chevron-down"></i>
         </span>
     </div>
@@ -25,15 +25,22 @@
                     <div class="content">
                         <h3 class="title">
                             <a href="product-details.html">
-                               @item.Name
+                                @item.Name
                             </a>
                         </h3>
-                        <p class="price"><span class="qty">1 </span> @item.Price</p>
+                        <p class="price">
+                            <span class="qty">
+                                <strong>
+                                    @item.Count
+                                </strong>
+                                X
+                            </span>  @item.Price
+                        </p>
                         <button class="cross-btn"><i class="fas fa-times"></i></button>
                     </div>
                 </div>
             </div>
-    
+
         }
         <div class=" single-cart-block ">
             <div class="btn-block">

@@ -16,4 +16,8 @@ public class AdminProductListItemVM
     public float Discount { get; set; }
     public bool IsDeleted { get; set; } = false;
 
+    public string Description { get; set; }
+
+    public int AuthorId { get; set; }
+
 }

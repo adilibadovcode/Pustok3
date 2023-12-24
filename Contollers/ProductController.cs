@@ -17,7 +17,6 @@ namespace SitePustok.Contollers
 
         public async Task<IActionResult> Index(string? q, List<int>? authorids, List<int>? catids)
         {
-
             ViewBag.Categories = _db.Categories.Include(c => c.Products);
             ViewBag.Author = _db.Author;
             var query = _db.Products.AsQueryable();
@@ -29,8 +28,17 @@ namespace SitePustok.Contollers
             {
                 query = query.Where(p => catids.Contains(p.CategoryId));
             }
-            return View(query.Select(p => new AdminProductListItemVM
+      
+            return View(query.Select(s => new AdminProductListItemVM
             {
+                Title = s.Title,
+                Availability = s.Availability,
+                CategoryId = s.CategoryId,
+                CostPrice = s.CostPrice,
+                Discount = s.Discount,
+                ImageUrl = s.ImageUrl,
+                SellPrice = s.SellPrice,
+                Description=s.Description,
 
             }));
         }
